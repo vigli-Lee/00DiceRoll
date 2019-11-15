@@ -10,8 +10,9 @@
         android:id="@+id/diceImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dice Rolled!"
-        android:textSize="24dp"
+        android:src="@drawable/empty_dice"
+        tools:src="@drawable/empty_dice"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/rollButton"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -25,7 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/diceImageView"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
