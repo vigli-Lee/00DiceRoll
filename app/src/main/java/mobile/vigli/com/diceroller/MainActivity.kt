@@ -1,5 +1,6 @@
 package mobile.vigli.com.diceroller
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -45,8 +46,15 @@ class MainActivity : AppCompatActivity() {
         if (diceNumber === number) checkCount++
         binding.countTextView.text = String.format(RESULT_FORMAT, checkCount, currentCount, TOTAL_GAME)
 
+        //게임 종료 확인
         if (currentCount === TOTAL_GAME) {
             binding.rollButton.isEnabled = false
+
+            val isCompleted = checkCount > 1
+
+            startActivity(Intent(this, ResultActivity::class.java)
+                    .putExtra("PARAM_NICKNAME", binding.nickNameEditText.text.toString())
+                    .putExtra("PARAM_COMPLETE", isCompleted))
         }
     }
 
