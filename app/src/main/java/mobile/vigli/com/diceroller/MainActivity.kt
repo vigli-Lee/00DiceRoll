@@ -1,13 +1,9 @@
 package mobile.vigli.com.diceroller
 
-import android.graphics.drawable.Drawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_main.*
-import org.w3c.dom.Text
+import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
