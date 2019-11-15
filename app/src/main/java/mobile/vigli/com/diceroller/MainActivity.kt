@@ -1,5 +1,6 @@
 package mobile.vigli.com.diceroller
 
+import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -20,15 +21,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onClick(v: View) {
-        val diceNumber = Random.nextInt(6) + 1
+        diceImageView.setImageResource(getRandomDiceImage())
+    }
 
-        when (diceNumber) {
-            1 -> diceImageView.setImageResource(R.drawable.dice_1)
-            2 -> diceImageView.setImageResource(R.drawable.dice_2)
-            3 -> diceImageView.setImageResource(R.drawable.dice_3)
-            4 -> diceImageView.setImageResource(R.drawable.dice_4)
-            5 -> diceImageView.setImageResource(R.drawable.dice_5)
-            6 -> diceImageView.setImageResource(R.drawable.dice_6)
+    private fun getRandomDiceImage(): Int {
+        return when (Random.nextInt(6) + 1) {
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            6 -> R.drawable.dice_6
+            else -> R.drawable.empty_dice
         }
     }
 }
