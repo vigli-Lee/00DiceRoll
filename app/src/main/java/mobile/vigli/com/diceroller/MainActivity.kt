@@ -1,6 +1,5 @@
 package mobile.vigli.com.diceroller
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -61,9 +60,7 @@ class MainActivity : AppCompatActivity() {
 
             val isCompleted = checkCount > 1
 
-            startActivity(Intent(this, ResultActivity::class.java)
-                    .putExtra("PARAM_NICKNAME", nickNameEditText.text.toString())
-                    .putExtra("PARAM_COMPLETE", isCompleted))
+            Toast.makeText(this, if(isCompleted) "성공" else "실패", Toast.LENGTH_SHORT).show()
         }
     }
 
