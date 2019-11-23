@@ -2,29 +2,38 @@ package mobile.vigli.com.diceroller
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import mobile.vigli.com.diceroller.databinding.ActivityMainBinding
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
     private var currentCount = 0
     private var checkCount = 0
 
+    private lateinit var countTextView: TextView
+    private lateinit var nickNameEditText: EditText
+    private lateinit var numberEditText: EditText
+    private lateinit var rollButton: Button
+    private lateinit var diceImageView: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setContentView(R.layout.activity_main)
+
+        countTextView = findViewById(R.id.countTextView)
+        nickNameEditText = findViewById(R.id.nickNameEditText)
+        numberEditText = findViewById(R.id.numberEditText)
+        rollButton = findViewById(R.id.rollButton)
+        diceImageView = findViewById(R.id.diceImageView)
 
         //주사위 굴리기 버튼 클릭
-        binding.rollButton.setOnClickListener {
-            if (isValidNickname(binding.nickNameEditText.text.toString())) {
-                val number = binding.numberEditText.text.toString()
+        rollButton.setOnClickListener {
+            if (isValidNickname(nickNameEditText.text.toString())) {
+                val number = numberEditText.text.toString()
                 if (isValidNumber(number)) {
                     playGame(number.toInt())
                 } else {
-                    binding.numberEditText.text.clear()
+                    numberEditText.text.clear()
                     showErrorToast("1~6 중 숫자를 적어주세요")
                 }
             } else {
@@ -42,18 +51,18 @@ class MainActivity : AppCompatActivity() {
     private fun playGame(number: Int) {
         currentCount++
         val diceNumber = Random.nextInt(6) + 1
-        binding.diceImageView.setImageResource(getRandomDiceImage(diceNumber))
+        diceImageView.setImageResource(getRandomDiceImage(diceNumber))
         if (diceNumber === number) checkCount++
-        binding.countTextView.text = String.format(RESULT_FORMAT, checkCount, currentCount, TOTAL_GAME)
+        countTextView.text = String.format(RESULT_FORMAT, checkCount, currentCount, TOTAL_GAME)
 
         //게임 종료 확인
         if (currentCount === TOTAL_GAME) {
-            binding.rollButton.isEnabled = false
+            rollButton.isEnabled = false
 
             val isCompleted = checkCount > 1
 
             startActivity(Intent(this, ResultActivity::class.java)
-                    .putExtra("PARAM_NICKNAME", binding.nickNameEditText.text.toString())
+                    .putExtra("PARAM_NICKNAME", nickNameEditText.text.toString())
                     .putExtra("PARAM_COMPLETE", isCompleted))
         }
     }
